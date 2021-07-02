@@ -1,0 +1,12 @@
+<div>
+  <passenger-count [items]="passengers"></passenger-count>
+  <passenger-detail
+    *ngFor="let passenger of passengers"
+    [passenger]="copy(passenger)"
+    (remove)="removePassenger($event)"
+    (edit)="editPassenger($event)"
+  ></passenger-detail>
+  <ul>
+    <li *ngFor="let passenger of passengers">{{ passenger.fullName }}</li>
+  </ul>
+</div>
