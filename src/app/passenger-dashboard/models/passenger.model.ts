@@ -9,4 +9,5 @@ export interface Passenger {
   checkedIn: boolean;
   checkInDate: number | null;
   children?: child[];
+  baggage: string
 }

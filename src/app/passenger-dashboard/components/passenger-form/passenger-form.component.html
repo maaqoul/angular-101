@@ -1,0 +1,74 @@
+<form
+  #form="ngForm"
+  novalidate
+  (ngSubmit)="updatePassenger(form.value, form.valid)"
+>
+  {{ passenger | json }}
+  <div>
+    <label>
+      id :
+      <input
+        type="number"
+        name="id"
+        [value]="passenger?.id"
+        readonly
+        #id="ngModel"
+        [ngModel]="passenger?.id"
+      />
+    </label>
+  </div>
+  <div>
+    <label>
+      Full Name :
+      <input
+        type="text"
+        name="fullName"
+        #fullName="ngModel"
+        [ngModel]="passenger?.fullName"
+        [value]="passenger?.fullName"
+        required
+      />
+    </label>
+    <div class="error" *ngIf="fullName?.errors?.required && fullName.dirty">
+      this field is required
+    </div>
+  </div>
+
+  <div>
+    <label>
+      checked In :
+      <input
+        type="checkbox"
+        name="checkedIn"
+        [ngModel]="passenger?.checkedIn"
+        (ngModelChange)="handleTimeStamp($event)"
+      />
+    </label>
+  </div>
+  <div *ngIf="form.value.checkedIn">
+    <label>
+      Checked in date:
+      <input
+        type="number"
+        name="checkInDate"
+        [ngModel]="passenger?.checkInDate"
+        hidden
+      />
+      <input
+        type="date"
+        [value]="convertTimeStampToDate(passenger?.checkInDate)"
+      />
+    </label>
+  </div>
+  <div>
+    <label>
+      baggage:
+      <select name="baggage" [ngModel]="passenger?.baggage">
+        <option *ngFor="let item of baggage" [ngValue]="item.key">
+          {{ item.value }}
+        </option>
+      </select>
+    </label>
+  </div>
+  <button type="submit" [disabled]="form.invalid">update passenger</button>
+</form>

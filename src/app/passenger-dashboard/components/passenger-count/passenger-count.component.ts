@@ -11,6 +11,6 @@ export class PassengerCountComponent {
   @Input() items: Passenger[];
 
   public getCheckedInCount(): number {
-    return this.items.filter(passenger => passenger.checkedIn).length;
+    return this.items?.filter(passenger => passenger.checkedIn)?.length;
   }
 }
