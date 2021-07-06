@@ -1,5 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import { Subscription } from "rxjs";
+import { switchMap } from 'rxjs/operators';
 import { Passenger } from "../../models/passenger.model";
 import { PassengerDashboardService } from "../../passenger-dashboard.service";
 
@@ -13,14 +15,15 @@ export class PassengerViewerComponent implements OnInit, OnDestroy {
   passenger: Passenger;
   getPassengerSubscription: Subscription;
 
-  constructor(private readonly passengerDashboardService: PassengerDashboardService) { }
+  constructor(private readonly passengerDashboardService: PassengerDashboardService, private readonly routes: ActivatedRoute) { }
 
   ngOnInit() {
-    this.getPassengerSubscription = this.passengerDashboardService.getPassenger(1).subscribe(passenger => this.passenger = passenger)
+    this.routes.params.pipe(switchMap(params => this.passengerDashboardService.getPassenger(+params.id))).subscribe(passenger => this.passenger = passenger)
+ 
   }
 
   ngOnDestroy() {
-    this.getPassengerSubscription.unsubscribe();
+    this.getPassengerSubscription?.unsubscribe();
   }
 
   handleUpdate(passenger: Passenger): void {

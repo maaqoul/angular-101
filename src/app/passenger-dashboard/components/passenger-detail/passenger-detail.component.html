@@ -27,5 +27,7 @@
   <div class="child">children :{{ passenger.children?.length || 0 }}</div>
   <button (click)="onEditing()">{{ editing ? "done" : "edit" }}</button>
   &nbsp;
+  <button [routerLink]="passenger.id">show Passenger</button>
+  &nbsp;
   <button (click)="onRemove()">remove</button>
 </div>

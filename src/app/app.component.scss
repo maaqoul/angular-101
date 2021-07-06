@@ -1,1 +1,16 @@
-
+.nav {
+    margin: 0 0 10px;
+    padding: 0 0 20px;
+    border-bottom: 1px solid #ccc;
+    a {
+        margin: 0 5px;
+        background: #686568;
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 2px;
+        &.active {
+            background: #424142;
+            color: #f8a6f8
+         }
+    }
+}

@@ -1,6 +1,10 @@
-import { Component, ViewEncapsulation } from "@angular/core"
+import { Component } from "@angular/core"
 
-
+interface Nav {
+  link: string,
+  name: string,
+  exact: boolean
+}
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,16 +13,21 @@ import { Component, ViewEncapsulation } from "@angular/core"
 
 
 export class AppComponent {
-  title = "sqli Angular training"
 
-  numberOne: number = 1;
-  numberTwo: number = 2;
-
-  isHappy: boolean = false;
-
-  logo: string = "https://suisse.sqli.com/logo.png";
-
-  name: string = "";
-
+  nav: Nav[] = [{
+    link: '/',
+    name: 'home',
+    exact: true
+  },
+  {
+    link: 'passengers',
+    name: 'passengers',
+    exact: false
+  },
+  {
+    link: '/asdasd',
+    name: '404',
+    exact: false
+  }]
 
 }
