@@ -1,23 +1,13 @@
 <div class="container">
   <passenger-count [items]="passengers"></passenger-count>
-  <passenger-detail></passenger-detail>
 
   <ul>
-    <li *ngFor="let passenger of passengers">
-      <span class="status" [ngClass]="getStatusClass(passenger)"></span>
-      {{ passenger.fullName }}
-
-      <div class="date">
-        Checkin Date :
-        {{
-          passenger.checkedIn
-            ? (passenger.checkInDate | date: "y MMMM d" | uppercase)
-            : "not checked in yet"
-        }}
-      </div>
-      <div class="children">
-        children: {{ passenger.children?.length || 0 }}
-      </div>
-    </li>
+    <li *ngFor="let passenger of passengers">{{ passenger.fullName }}</li>
   </ul>
+  <passenger-detail
+    *ngFor="let passenger of passengers"
+    [item]="passenger"
+    (remove)="handleRemove($event)"
+    (edit)="handleEdit($event)"
+  ></passenger-detail>
 </div>

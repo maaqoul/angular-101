@@ -67,7 +67,17 @@ export class PassengerDashboardComponent implements OnInit {
         ];
     }
 
-    getStatusClass({ checkedIn }: { checkedIn: boolean }): { [key: string]: boolean } {
-        return { 'checked-in': checkedIn, 'checked-out': !checkedIn }
+    handleRemove(passenger: Passenger): void {
+        this.passengers = this.passengers.filter(item => item.id !== passenger.id)
+    }
+
+    handleEdit(passenger: Passenger) {
+        this.passengers = this.passengers.map(item => {
+            if (item.id === passenger.id) {
+                item = Object.assign({}, item, passenger);
+                return item
+            }
+            return item
+        })
     }
 } 

@@ -1,1 +1,27 @@
-<div class="detail">passenger detail</div>
+<div class="detail">
+  <span class="status" [ngClass]="getStatusClass(item)"></span>
+  <input
+    *ngIf="editing"
+    type="text"
+    [value]="item.fullName"
+    #name
+    (input)="handleOnNameChange(name.value)"
+  />
+  <span *ngIf="!editing">{{ item.fullName }}</span>
+
+  <div class="date">
+    Checkin Date :
+    {{
+      item.checkedIn
+        ? (item.checkInDate | date: "y MMMM d" | uppercase)
+        : "not checked in yet"
+    }}
+  </div>
+  <div class="children">children: {{ item.children?.length || 0 }}</div>
+  <div>
+    <button (click)="toggleEdit()">{{ editing ? "Done" : "Edit" }}</button>
+  </div>
+  <div>
+    <button (click)="onRemove()">remove</button>
+  </div>
+</div>
